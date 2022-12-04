@@ -1,21 +1,17 @@
 import { Router } from 'express';
-
+import { getSolicitudes, createSolicitudes, updateSolicitudes, deleteSolicitudes, getSolicitud, update1Solicitudes} from '../controllers/solicitudes.controllers.js';
 const router = Router();
 
-router.get('/solicitudes', (req, res) => {
-  res.send('obteninedo solicitudes');
-});
+router.get('/solicitudes', getSolicitudes);  
+router.get('/solicitudes/:id', getSolicitud);
 
-router.post('/solicitudes', (req, res) => {
-  res.send('creando solicitudes');
-});
+router.post('/solicitudes', createSolicitudes);
 
-router.put('/solicitudes', (req, res) => {
-  res.send('actualizando solicitudes');
-});
+router.delete('/solicitudes/:id', deleteSolicitudes);
 
-router.delete('/solicitudes', (req, res) => {
-  res.send('eliminando solicitud');
-});
+router.put('/solicitudes/:tipo', updateSolicitudes);
+
+router.patch('/solicitudes/:id_encargado', update1Solicitudes);
+
 
 export default router;

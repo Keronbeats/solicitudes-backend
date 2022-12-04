@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS solicitudesdb;
 
 CREATE TABLE `Usuario` (
-    `Email` varchar(45)  NOT NULL ,
+    `Email` varchar(45)  NOT NULL,
     `password` varchar(45)  NOT NULL ,
     `nombre` varchar(45)  NOT NULL ,
     `tipo_usuario` int  NOT NULL ,
@@ -11,7 +11,7 @@ CREATE TABLE `Usuario` (
 );
 
 CREATE TABLE `TIPO_USUARIO` (
-    `tipo` int  NOT NULL ,
+    `tipo` int  NOT NULL AUTO_INCREMENT,
     `type` varchar(45)  NOT NULL ,
     PRIMARY KEY (
         `tipo`
