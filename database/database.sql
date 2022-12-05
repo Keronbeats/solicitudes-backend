@@ -19,7 +19,7 @@ CREATE TABLE `TIPO_USUARIO` (
 );
 
 CREATE TABLE `Solicitud` (
-    `id_solicitud` int  NOT NULL ,
+    `id_solicitud` int  NOT NULL AUTO_INCREMENT,
     `tipo_solicitud` int  NOT NULL ,
     `email_usuario` varchar(45)  NOT NULL ,
     `descripcion` varchar(100)  NOT NULL ,
@@ -31,7 +31,7 @@ CREATE TABLE `Solicitud` (
 );
 
 CREATE TABLE `Area` (
-    `id_area` int  NOT NULL ,
+    `id_area` int  NOT NULL AUTO_INCREMENT,
     `nombre_area` varchar(45)  NOT NULL ,
     `encargado_area` int  NOT NULL ,
     PRIMARY KEY (
@@ -40,7 +40,7 @@ CREATE TABLE `Area` (
 );
 
 CREATE TABLE `TIPO_SOLICITUD` (
-    `id_solicitud` int  NOT NULL ,
+    `id_solicitud` int  NOT NULL AUTO_INCREMENT,
     `type` varchar(45)  NOT NULL ,
     PRIMARY KEY (
         `id_solicitud`
@@ -48,7 +48,7 @@ CREATE TABLE `TIPO_SOLICITUD` (
 );
 
 CREATE TABLE `Encargado` (
-    `id_encargado` int  NOT NULL ,
+    `id_encargado` int  NOT NULL AUTO_INCREMENT,
     `nombre` varchar(45)  NOT NULL ,
     `email` varchar(45)  NOT NULL ,
     PRIMARY KEY (

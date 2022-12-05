@@ -1,23 +1,23 @@
 import { pool } from "../dbConection.js";
-// OBTENER TODOS LOS USUARIOS DE LA TABLA
+// OBTENER TODAS LAS SOLICITUDES DE LA TABLA
 export const getSolicitudes = async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM TIPO_USUARIO')
+        const [rows] = await pool.query('SELECT * FROM Solicitud')
         res.json(rows)
-        
+
     } catch (error) {
         return res.status(500).json({
             message: 'Something goes wrong'
         })
     }
 }
-// OBTENER SOLO 1 USUARIO POR ID 
+// OBTENER SOLO 1 SOLICITUD POR ID 
 export const getSolicitud = async (req, res) =>{
     try {
-        const [rows] = await pool.query('SELECT * FROM TIPO_USUARIO WHERE tipo = ?', [req.params.id])
+        const [rows] = await pool.query('SELECT * FROM Solicitud WHERE id_solicitud = ?', [req.params.id])
 
     if(rows.length <= 0) return res.status(404).json({
-        message: 'TYPE OF USER NOT FOUND'
+        message: 'SOLICITUD NOT FOUND'
     })
     console.log(rows)
     res.json(rows[0])
@@ -36,12 +36,14 @@ export const getSolicitud = async (req, res) =>{
 //      id: rows.insertId,
 //      tipo,
 //      type,})}
+
+//  PARA CREAR SOLICITUD
 export const createSolicitudes = async (req, res) => {
-        const {id_encargado ,nombre, email} = req.body
+        const {id_solicitud ,tipo_solicitud,email_usuario,descripcion,area,resuelto} = req.body
         try {
-            const [rows] = await pool.query('INSERT INTO Encargado(id_encargado ,nombre, email) VALUES(?, ?, ?)',
-        [id_encargado ,nombre, email])
-        res.send({id:rows.insertId,id_encargado,nombre,email,})
+            const [rows] = await pool.query('INSERT INTO Solicitud(id_solicitud ,tipo_solicitud,email_usuario,descripcion,area,resuelto) VALUES(?,?,?,?,?,?)',
+        [id_solicitud ,tipo_solicitud,email_usuario,descripcion,area,resuelto])
+        res.send({id:rows.insertId,id_solicitud ,tipo_solicitud,email_usuario,descripcion,area,resuelto})
         } catch (error) {
             return res.status(500).json({
                 message: 'Something goes wrong'
@@ -103,6 +105,48 @@ export const update1Solicitudes = async (req, res) => {
     const [rows] = await pool.query('SELECT * FROM Encargado WHERE id_encargado = ?',[id_encargado])
 
     res.json(rows[0])
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Something goes wrong'
+        })
+    }
+}
+
+// PARA ACTUALIZAR CAMPO RESUELTO DE TABLA SOLICITUD CON EL ID DE SOLICITUD
+export const uptadeCampoinSolicitud = async (req, res) => {
+    const {id_solicitud} = req.params
+    const {tipo_solicitud,email_usuario,descripcion,area,resuelto} = req.body
+
+    try {
+        const [result] = await pool.query('UPDATE Solicitud SET tipo_solicitud = IFNULL(?, tipo_solicitud), email_usuario = IFNULL(?, email_usuario), descripcion = IFNULL(?, descripcion), area = IFNULL(?, area), resuelto = IFNULL(?, resuelto) WHERE id_solicitud = ?',
+        [tipo_solicitud,email_usuario,descripcion,area,resuelto,id_solicitud])
+    console.log(result)
+
+    if (result.affectedRows === 0) return res.status(404).json({
+        message: 'Solicitud not found'
+    })
+
+    const [rows] = await pool.query('SELECT * FROM Solicitud WHERE id_solicitud = ?',[id_solicitud])
+
+    res.json(rows[0])
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Something goes wrong'
+        })
+    }
+}
+// PARA ELIMINAR SOLICITUD POR ID DE LA TABLA SOLICITUD
+export const deleteSolicitudByid = async (req, res) => {
+    try {
+        const [result] = await pool.query('DELETE FROM Solicitud WHERE id_solicitud = ?', [req.params.id])
+
+    console.log(result)
+
+    if(result.affectedRows <= 0) return res.status(404).json({
+        message: 'Solicitud not found'
+    })
+
+    res.sendStatus(204)
     } catch (error) {
         return res.status(500).json({
             message: 'Something goes wrong'
