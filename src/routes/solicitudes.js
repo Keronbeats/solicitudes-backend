@@ -20,7 +20,7 @@ router.delete('/solicitudes/:id', deleteSolicitudes);
 
 router.put('/solicitudes/:tipo', updateSolicitudes);
 
-router.patch('/solicitudes/:id_encargado', update1Solicitudes);
+//router.patch('/solicitudes/:id_encargado', update1Solicitudes);
 
 router.patch('/solicitudes/:id_solicitud', uptadeCampoinSolicitud); // PARA ACTUALIZAR CAMPO RESUELTO DE TABLA SOLICITUD CON EL ID DE SOLICITUD
 
