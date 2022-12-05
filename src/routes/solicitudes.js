@@ -16,7 +16,7 @@ router.get('/solicitudes/:id', getSolicitud); // OBTENER SOLO 1 SOLICITUD POR ID
 
 router.post('/solicitudes', createSolicitudes);  //  PARA CREAR SOLICITUD
 
-router.delete('/solicitudes/:id', deleteSolicitudes);
+//router.delete('/solicitudes/:id', deleteSolicitudes);
 
 router.put('/solicitudes/:tipo', updateSolicitudes);
 
