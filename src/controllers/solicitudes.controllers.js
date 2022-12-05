@@ -138,7 +138,7 @@ export const uptadeCampoinSolicitud = async (req, res) => {
 // PARA ELIMINAR SOLICITUD POR ID DE LA TABLA SOLICITUD
 export const deleteSolicitudByid = async (req, res) => {
     try {
-        const [result] = await pool.query('DELETE FROM Solicitud WHERE id_solicitud = ?', [req.params.id])
+        const [result] = await pool.query('DELETE FROM Solicitud WHERE id_solicitud = ?', [req.params.id_solicitud])
 
     console.log(result)
 
